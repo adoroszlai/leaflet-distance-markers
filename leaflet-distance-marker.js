@@ -1,11 +1,13 @@
 L.DistanceMarkers = L.FeatureGroup.extend({
 	initialize: function (line, map) {
-		this._layers = {};
 		var len = L.GeometryUtil.length(line);
 		var marker_freq = 1000;
-		for (var dist = 0; dist < len; dist += marker_freq) {
+		var count = Math.floor(len / marker_freq);
+		this._layers = {};
+		for (var i = 0; i <= count; ++i) {
+			var dist = marker_freq * i;
 			var next = L.GeometryUtil.interpolateOnLine(map, line, dist/len);
-			var marker = L.marker(next.latLng, { title: dist/marker_freq });
+			var marker = L.marker(next.latLng, { title: i, icon: L.divIcon({ html: i }) });
 			this.addLayer(marker);
 		}
 	}
