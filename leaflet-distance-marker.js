@@ -4,10 +4,10 @@ L.DistanceMarkers = L.FeatureGroup.extend({
 		var marker_freq = 1000;
 		var count = Math.floor(len / marker_freq);
 		this._layers = {};
-		for (var i = 0; i <= count; ++i) {
+		for (var i = 1; i <= count; ++i) {
 			var dist = marker_freq * i;
 			var next = L.GeometryUtil.interpolateOnLine(map, line, dist/len);
-			var marker = L.marker(next.latLng, { title: i, icon: L.divIcon({ html: i }) });
+			var marker = L.marker(next.latLng, { title: i, icon: L.divIcon({ className: 'dist-marker', html: i }) });
 			this.addLayer(marker);
 		}
 	}
