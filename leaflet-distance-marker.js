@@ -67,7 +67,7 @@ L.Polyline.include({
 
 	onAdd: function (map) {
 		this._originalOnAdd(map);
-		this._distanceMarkers = new L.DistanceMarkers(this, map);
+		this._distanceMarkers = new L.DistanceMarkers(this, map, this.options.distanceMarkers);
 		map.addLayer(this._distanceMarkers);
 	},
 

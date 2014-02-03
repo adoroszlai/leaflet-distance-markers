@@ -20,7 +20,10 @@
 			maxZoom: 18,
 		}).addTo(map);
 
-		var line = L.polyline(coords);
+		var one_mile = 1600;
+		var line = L.polyline(coords, {
+			distanceMarkers: { showAll: 11, offset: one_mile }
+		});
 		map.fitBounds(line.getBounds());
 		map.addLayer(line);
 	</script>
