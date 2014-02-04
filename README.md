@@ -18,6 +18,7 @@ var line = L.polyline(coords, {
 
  * **offset**: distance in meters between the markers (default: 1000 (= 1 km))
  * **showAll**: the zoom level at which all distance markers will be shown -- zooming out once from this level will remove approximately half of the markers (default: 12)
+ * **lazy**: postpone adding the markers until Polyline.addDistanceMarkers is explicitly called (default: false)
 
 ## Requirements
 

@@ -22,8 +22,10 @@
 
 		var one_mile = 1600;
 		var line = L.polyline(coords, {
-			distanceMarkers: { showAll: 11, offset: one_mile }
+			distanceMarkers: { showAll: 11, offset: one_mile, lazy: true }
 		});
+		line.on('mouseover', line.addDistanceMarkers);
+		line.on('mouseout', line.removeDistanceMarkers);
 		map.fitBounds(line.getBounds());
 		map.addLayer(line);
 	</script>

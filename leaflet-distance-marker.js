@@ -65,14 +65,32 @@ L.Polyline.include({
 	_originalOnAdd: L.Polyline.prototype.onAdd,
 	_originalOnRemove: L.Polyline.prototype.onRemove,
 
+	addDistanceMarkers: function () {
+		if (this._map && this._distanceMarkers) {
+			this._map.addLayer(this._distanceMarkers);
+		}
+	},
+
+	removeDistanceMarkers: function () {
+		if (this._map && this._distanceMarkers) {
+			this._map.removeLayer(this._distanceMarkers);
+		}
+	},
+
 	onAdd: function (map) {
 		this._originalOnAdd(map);
-		this._distanceMarkers = new L.DistanceMarkers(this, map, this.options.distanceMarkers);
-		map.addLayer(this._distanceMarkers);
+
+		var opts = this.options.distanceMarkers || {};
+		if (this._distanceMarkers === undefined) {
+			this._distanceMarkers = new L.DistanceMarkers(this, map, opts);
+		}
+		if (opts.lazy === undefined || opts.lazy === false) {
+			this.addDistanceMarkers();
+		}
 	},
 
 	onRemove: function (map) {
-		map.removeLayer(this._distanceMarkers);
+		this.removeDistanceMarkers();
 		this._originalOnRemove(map);
 	}
 
