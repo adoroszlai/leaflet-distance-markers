@@ -4,6 +4,8 @@ Plugin for Leaflet to display markers along a route at equivalent distances.
 
 ## Example
 
+[demo](https://adoroszlai.github.io/leaflet-distance-markers/)
+
 ```javascript
 // use defaults
 var line = L.polyline(coords);
@@ -12,6 +14,15 @@ var line = L.polyline(coords);
 var line = L.polyline(coords, {
 	distanceMarkers: { showAll: 11, offset: 1600 }
 });
+
+// show/hide markers on mouseover
+var line = L.polyline(coords, {
+	distanceMarkers: { lazy: true }
+});
+line.on('mouseover', line.addDistanceMarkers);
+line.on('mouseout', line.removeDistanceMarkers);
+map.fitBounds(line.getBounds());
+map.addLayer(line);
 ```
 
 ## Options
