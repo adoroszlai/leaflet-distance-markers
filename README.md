@@ -4,7 +4,7 @@ Plugin for Leaflet to display markers along a route at equivalent distances.
 
 ## Example
 
-[demo](https://adoroszlai.github.io/leaflet-distance-markers/)
+[demo](http://adoroszlai.github.io/leaflet-distance-markers/)
 
 ```javascript
 // use defaults
