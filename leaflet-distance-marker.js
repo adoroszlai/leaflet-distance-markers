@@ -34,6 +34,9 @@ L.DistanceMarkers = L.LayerGroup.extend({
 		// Get line coords as an array
         	  if (typeof line.getLatLngs == 'function') {
                 	var coords = line.getLatLngs();
+        	 } else 
+        	 {
+        	 	var coords = line;
         	 }
             	// Get accumulated line lengths as well as overall length
             	var accumulated = L.GeometryUtil.accumulatedLengths(line);
@@ -47,7 +50,7 @@ L.DistanceMarkers = L.LayerGroup.extend({
 			var distance = offset * i;
 			// Find the first accumulated distance that is greater
         		// than the distance of this marker
-                	while (j < length - 1 && accumulated[j] < distance) {
+                	while (j < accumulated.length - 1 && accumulated[j] < distance) {
                     		++j;
         		 }
                 	// Now grab the two nearest points either side of
