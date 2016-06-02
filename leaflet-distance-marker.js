@@ -53,8 +53,8 @@ L.DistanceMarkers = L.LayerGroup.extend({
                 	// Now grab the two nearest points either side of
                 	// distance marker position and create a simple line to
                 	// interpolate on
-                	var p1 = coords[j];
-                	var p2 = coords[j + 1];
+                	var p1 = coords[j - 1];
+                	var p2 = coords[ j ];
                 	var m_line = L.polyline([p1, p2]);
                 	var ratio = (distance - accumulated[j - 1]) / (accumulated[j] - accumulated[j - 1]);
 	                var position = L.GeometryUtil.interpolateOnLine(map, m_line, ratio);
