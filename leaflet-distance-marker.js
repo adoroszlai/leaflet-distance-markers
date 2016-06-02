@@ -31,12 +31,36 @@ L.DistanceMarkers = L.LayerGroup.extend({
 		var cssClass = options.cssClass || 'dist-marker';
 
 		var zoomLayers = {};
-		var length = L.GeometryUtil.length(line);
+		// Get line coords as an array
+        	  if (typeof line.getLatLngs == 'function') {
+                	var coords = line.getLatLngs();
+        	 } else 
+        	 {
+        	 	var coords = line;
+        	 }
+            	// Get accumulated line lengths as well as overall length
+            	var accumulated = L.GeometryUtil.accumulatedLengths(line);
+            	var length = accumulated.length > 0 ? accumulated[accumulated.length - 1] : 0;
+            	// Position in accumulated line length array
+            	var j = 0;
+            	// Number of distance markers to be added
 		var count = Math.floor(length / offset);
 
 		for (var i = 1; i <= count; ++i) {
 			var distance = offset * i;
-			var position = L.GeometryUtil.interpolateOnLine(map, line, distance / length);
+			// Find the first accumulated distance that is greater
+        		// than the distance of this marker
+                	while (j < accumulated.length - 1 && accumulated[j] < distance) {
+                    		++j;
+        		 }
+                	// Now grab the two nearest points either side of
+                	// distance marker position and create a simple line to
+                	// interpolate on
+                	var p1 = coords[j - 1];
+                	var p2 = coords[ j ];
+                	var m_line = L.polyline([p1, p2]);
+                	var ratio = (distance - accumulated[j - 1]) / (accumulated[j] - accumulated[j - 1]);
+	                var position = L.GeometryUtil.interpolateOnLine(map, m_line, ratio);
 			var icon = L.divIcon({ className: cssClass, html: i });
 			var marker = L.marker(position.latLng, { title: i, icon: icon });
 
