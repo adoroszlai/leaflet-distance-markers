@@ -15,6 +15,11 @@ var line = L.polyline(coords, {
 	distanceMarkers: { showAll: 11, offset: 1600, cssClass: 'some-other-class' }
 });
 
+// do not add markers to this line
+var noMarkers = L.polyline(coords, {
+	distanceMarkers: { disabled: true }
+});
+
 // show/hide markers on mouseover
 var line = L.polyline(coords, {
 	distanceMarkers: { lazy: true }

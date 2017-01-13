@@ -129,6 +129,9 @@ L.Polyline.include({
 		this._originalOnAdd(map);
 
 		var opts = this.options.distanceMarkers || {};
+		if (opts.disabled === true) {
+			return;
+		}
 		if (this._distanceMarkers === undefined) {
 			this._distanceMarkers = new L.DistanceMarkers(this, map, opts);
 		}
