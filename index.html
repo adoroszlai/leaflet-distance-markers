@@ -20,7 +20,9 @@
 			maxZoom: 18,
 		}).addTo(map);
 
-		var line = L.polyline(coords);
+		var line = L.polyline(coords, {
+			distanceMarkers: { showAll: 13, offset: 500, iconSize: null }
+		});
 		map.fitBounds(line.getBounds());
 		map.addLayer(line);
 	</script>
