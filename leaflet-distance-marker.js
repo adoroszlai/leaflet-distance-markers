@@ -29,6 +29,7 @@ L.DistanceMarkers = L.LayerGroup.extend({
 		var offset = options.offset || 1000;
 		var showAll = Math.min(map.getMaxZoom(), options.showAll || 12);
 		var cssClass = options.cssClass || 'dist-marker';
+		var iconSize = options.iconSize !== undefined ? options.iconSize : [12, 12];
 
 		var zoomLayers = {};
 		// Get line coords as an array
@@ -59,7 +60,7 @@ L.DistanceMarkers = L.LayerGroup.extend({
 			var m_line = L.polyline([p1, p2]);
 			var ratio = (distance - accumulated[j - 1]) / (accumulated[j] - accumulated[j - 1]);
 			var position = L.GeometryUtil.interpolateOnLine(map, m_line, ratio);
-			var icon = L.divIcon({ className: cssClass, html: i });
+			var icon = L.divIcon({ className: cssClass, html: i, iconSize: iconSize });
 			var marker = L.marker(position.latLng, { title: i, icon: icon });
 
 			// visible only starting at a specific zoom level
