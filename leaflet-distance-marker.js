@@ -130,7 +130,7 @@ L.Polyline.include({
 		this._originalOnAdd(map);
 
 		var opts = this.options.distanceMarkers || {};
-		if (this._distanceMarkers === undefined) {
+		if (this._distanceMarkers === undefined && this.options.distanceMarkers) {
 			this._distanceMarkers = new L.DistanceMarkers(this, map, opts);
 		}
 		if (opts.lazy === undefined || opts.lazy === false) {
