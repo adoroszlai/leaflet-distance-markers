@@ -1,0 +1,25 @@
+{
+  "name": "leaflet-distance-markers",
+  "version": "0.1.0",
+  "description": "Leaflet plugin to display markers along a route at equivalent distances.",
+  "main": "leaflet-distance-marker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adoroszlai/leaflet-distance-markers"
+  },
+  "keywords": [
+    "leaflet",
+    "plugin",
+    "distance",
+    "markers"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adoroszlai/leaflet-distance-markers/issues"
+  },
+  "homepage": "https://github.com/adoroszlai/leaflet-distance-markers#readme"
+}
