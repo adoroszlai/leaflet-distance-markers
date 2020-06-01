@@ -34,6 +34,11 @@ map.addLayer(line);
  * **lazy**: postpone adding the markers until Polyline.addDistanceMarkers is explicitly called (default: false)
  * **cssClass**: CSS class to set on marker icons
  * **iconSize**: size of the marker icon in pixels; type: [L.Point](http://leafletjs.com/reference.html#point) or array (default: `[12, 12]`); set to `null` to allow sizing via CSS class (see example on `icon-size` branch)
+ * **textFunction**: function to generate the text to be displayed in markers; parameters:
+   * `distance`: distance of the current marker
+   * `index`: index of the current marker (this is displayed by default)
+   * `offset`: distance between markers
+
 
 ## Requirements
 
