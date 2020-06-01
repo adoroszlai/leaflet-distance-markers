@@ -30,12 +30,10 @@ L.DistanceMarkers = L.LayerGroup.extend({
 		var showAll = Math.min(map.getMaxZoom(), options.showAll || 12);
 		var cssClass = options.cssClass || 'dist-marker';
 		var iconSize = options.iconSize !== undefined ? options.iconSize : [12, 12];
-		var textFunction =
-		    options.textFunction ||
-		    function(distance, i) {
+		var textFunction = options.textFunction || function(distance, i, offset) {
 			return i;
-		    };
-		
+		};
+
 		var zoomLayers = {};
 		// Get line coords as an array
 		var coords = line;
@@ -60,12 +58,12 @@ L.DistanceMarkers = L.LayerGroup.extend({
 			// Now grab the two nearest points either side of
 			// distance marker position and create a simple line to
 			// interpolate on
-            		var text = textFunction.call(this, distance, i, offset);			
 			var p1 = coords[j - 1];
 			var p2 = coords[j];
 			var m_line = L.polyline([p1, p2]);
 			var ratio = (distance - accumulated[j - 1]) / (accumulated[j] - accumulated[j - 1]);
 			var position = L.GeometryUtil.interpolateOnLine(map, m_line, ratio);
+			var text = textFunction.call(this, distance, i, offset);
 			var icon = L.divIcon({ className: cssClass, html: text, iconSize: iconSize });
 			var marker = L.marker(position.latLng, { title: text, icon: icon });
 
