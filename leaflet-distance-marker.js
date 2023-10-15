@@ -117,6 +117,7 @@ L.Polyline.include({
 
 	_originalOnAdd: L.Polyline.prototype.onAdd,
 	_originalOnRemove: L.Polyline.prototype.onRemove,
+	_originalSetLatLngs: L.Polyline.prototype.setLatLngs,
 
 	addDistanceMarkers: function () {
 		if (this._map && this._distanceMarkers) {
@@ -132,14 +133,36 @@ L.Polyline.include({
 
 	onAdd: function (map) {
 		this._originalOnAdd(map);
+		this.createDistanceMarkers();
+	},
+
+	createDistanceMarkers: function() {
+		if (!this._map) return;
 
 		var opts = this.options.distanceMarkers || {};
 		if (this._distanceMarkers === undefined && this.options.distanceMarkers) {
-			this._distanceMarkers = new L.DistanceMarkers(this, map, opts);
+			this._distanceMarkers = new L.DistanceMarkers(this, this._map, opts);
 		}
 		if (opts.lazy === undefined || opts.lazy === false) {
 			this.addDistanceMarkers();
 		}
+	},
+
+	destroyDistanceMarkers: function() {
+		if (this._distanceMarkers) {
+			this._distanceMarkers = undefined;
+		}
+	},
+
+	setLatLngs: function (latlngs) {
+		var recreate = this._map && this._distanceMarkers;
+		this.removeDistanceMarkers();
+		this.destroyDistanceMarkers();
+		var result = this._originalSetLatLngs(latlngs);
+		if (recreate) {
+			this.createDistanceMarkers();
+		}
+		return result;
 	},
 
 	onRemove: function (map) {
